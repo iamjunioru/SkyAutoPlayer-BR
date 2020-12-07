@@ -2,15 +2,15 @@
 "use strict";
 
 /*
-    SkyAutoPlayer (Auto.js script)
-  	Copyright © 2020 StageGuard
-	  Contact : 
-	  (QQ: 1355416608)
-	  (Email: beamiscool@qq.com)
-	  (BaiduTieba@拐角处_等你)
-	  (Weibo@StageGuard)
-	  (CoolApk@StageGuard)
-	  (Twiter@stageguardcn)
+    SkyAutoPlayer-BR (Auto.js script)
+  © 2020 mod by dream~
+    Contatos : 
+    (Wpp: +55 88 99495-3035)
+    (Email: iamjunioru@gmail.com)
+    (Twitter: @O_DR3AM3R)
+    (Gitee: iamjunioru)
+    (Github: iamjunioru)
+    (...)
 
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public

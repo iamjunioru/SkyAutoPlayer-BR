@@ -511,7 +511,7 @@ config = {
 	//A ordem de busca é conteúdo bruto do gitee → jsdelivr cdn → conteúdo bruto do github
 	fetchRepoFile: function(path, gitVersion, successCbk, failCbk) {
 		//basta usar o mais a
-		var resp = http.get(encodeURI("https://gitee.com/iamjunioru/SkyAutoPlayer-BR/raw/master/" + path));
+		var resp = http.get(encodeURI("https://gitee.com/iamjunioru/SkyAutoPlayer-BR/tree/main/" + path));
 		if(resp.statusCode >= 200 && resp.statusCode < 300) {
 			successCbk(resp.body);
 			return;

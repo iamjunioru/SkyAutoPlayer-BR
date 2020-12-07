@@ -1,15 +1,15 @@
 "ui";
 "use strict";
 /*
-    SkyAutoPlayer (Auto.js script)
-	Copyright © 2020 StageGuard
-	  Contact : 
-	  (QQ: 1355416608)
-	  (Email: beamiscool@qq.com)
-	  (BaiduTieba@拐角处_等你)
-	  (Weibo@StageGuard)
-	  (CoolApk@StageGuard)
-	  (Twiter@stageguardcn)
+    SkyAutoPlayer-BR (Auto.js script)
+	© 2020 mod by dream~
+	  Contatos : 
+	  (Wpp: +55 88 99495-3035)
+	  (Email: iamjunioru@gmail.com)
+	  (Twitter: @O_DR3AM3R)
+	  (Gitee: iamjunioru)
+	  (Github: iamjunioru)
+	  (...)
 
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public
@@ -28,40 +28,40 @@
 */
 
 const user_agreements = 
-	"请仔细阅读以下使用须知！\n\n" + 
-	"未充分测试，若遇到BUG，请酷安私信@StageGuard或在github中的StageGuard/SkyAutoPlayerScript新建Issue来反馈BUG！\n\n" + 
-	"1. SkyAutoPlayer(以下简称\"本脚本\")是完全免费且开源的软件/脚本(https://github.com/StageGuard/SkyAutoPlayerScript)，禁止使用本脚本作为盈利用途！\n若你是从其他渠道购买获得的本脚本，那么就说明你被骗了！\n\n" + 
-	"2. 本脚本仅可用作娱乐用途，请不要在正规场合使用本脚本(请自行体会\"正规场合\"是什么意思)，若因使用本脚本所出现了一些不友好的问题，与脚本作者StageGuard(以下简称\"作者\")无关。\n\n" + 
-	"3. 脚本只能给你一时满足感而不能使你进步，请适当使用，只有真正的技术才是王道，才能使你感到快乐。\n\n" + 
-	"4. 本脚本只是一个\"弹奏机\"，并不内置曲谱，请在GooglePlay下载SkyStudio编谱。\n\n" + 
-	"5. 本脚本不会增加解密乐谱功能，包括但不限于加密的SkyStudio乐谱，加密的JS等，也不接受加密乐谱的共享。\n\n" + 
-	"6. 本脚本的发行遵守LGPL-2.1协议，若你不了解协议内容，请访问 https://www.gnu.org/licenses 查看"
+	"Por favor, leia as instruções a seguir!\n\n" + 
+	"Se você encontrar algum bug, ​​envie uma mensagem privada para @iamjunioru ou crie um novo issue em iamjunioru/SkyAutoPlayer-BR no github para enviar um feedback sobre o bug.\n\n" + 
+	"1. SkyAutoPlayer(Doravante referido como\"Este script\")É um software/script totalmente gratuito - open source(https://github.com/iamjunioru/SkyAutoPlayer-BR)，O uso deste script para fins lucrativos é proibido！\nSe você comprou este script de outras fontes, você foi enganado.\n\n" + 
+	"2. Este script só pode ser usado para fins de entretenimento, por favor, não use este script em ocasiões formais(para se beneficiar)，Se houver alguns problemas hostis devido ao uso deste script，não tem nada a ver com o autor do script ~@iamjunioru (doravante referido como\"Autor\")Irrelevante.\n\n" + 
+	"3. Os scripts podem apenas dar a você uma sensação de satisfação, mas não de progresso，Use-o de forma adequada, lembre que apenas o esforço e dedicação real pode fazer você feliz.\n\n" + 
+	"4. Este script é apenas um\"game machine\"，Sem scores incorporados，baixe as composições do SkyStudio na GooglePlay。\n\n" + 
+	"5. Este script não aumentará a função de score descriptografado, apenas incluindo mas não se limitando a scores criptografadas do SkyStudio, JS criptografado, etc., nem aceita o compartilhamento de scores criptografadas.\n\n" + 
+	"6. A distribuição deste script está em conformidade com o contrato LGPL-2.1. Se você não souber o conteúdo do contrato, visite https://www.gnu.org/licenses para visualizar."
 ;
 
-//Script global scope
+//script global scope
 const scope = this;
-//activity context
+//contexto de atividade
 const ctx = activity;
 
-//global gui
+//interface global
 var gui = null;
 //SimpleListAdapter(gitee@projectXero)
 var RhinoListAdapter;
-//sheets manager
+//gerenciador de sheets
 var sheetmgr = null;
 //sheets player
 var sheetplayer = null;
-//load config & resources
+//carregar configuração e recursos
 var config = null;
-//display density
+//densidade da tela
 scope.dp = context.getResources().getDisplayMetrics().density;
-//show error;
+//mostrar erro;
 const error = function(text) {
 	console.show();
-	console.error("SkyAutoPlayer发生了一个错误，请酷安私信@StageGuard或在github中的StageGuard/SkyAutoPlayerScript新建Issue来反馈这个BUG！\n详细信息：" + text);
+	console.error("Ocorreu um erro no SkyAutoPlayer, envie uma mensagem privada para @iamjunioru ou crie um novo issue no StageGuard/SkyAutoPlayerScript no github para relatar esse bug!\ndetalhes：" + text);
 };
 
-//Asynchronous load script
+//script de carregamento assíncrono
 threads.start(function() {
 	
 sheetmgr = {
@@ -117,7 +117,7 @@ sheetmgr = {
 			sheetmgr.cachedLocalSheetList.push(parsed);
 			listener({status:3});
 		}, function (msg) {
-			listener({status:-1, msg: "获取 " + remoteHost + " 失败，原因：" + resp.statusMessage});
+			listener({status:-1, msg: "Obtivemos " + remoteHost + " Falha, motivo：" + resp.statusMessage});
 		});
 	},
 	
@@ -133,7 +133,7 @@ sheetmgr = {
 				//parsed.songNotes = this.parseSongNote(parsed.songNotes);
 				
 				if(typeof(parsed.songNotes[0]) == "number" || parsed.isEncrypted) {
-					//failed type = 1 为加载了加密的JSON谱子
+					//failed type = 1 para carregar a partitura JSON criptografada
 					parsed = {failed: true, errtype: 1, fileName: sheets[i], reason: "It is a encrypted JSON sheet."};
 					failed ++;
 				} else {
@@ -142,8 +142,8 @@ sheetmgr = {
 				this.cachedLocalSheetList.push(parsed);
 			} catch (e) {
 				failed ++;
-				//failed type = 2 为JSON格式有误
-				//failed type = -1 为未知错误
+				//failed type = 2 formato errado para JSON
+				//failed type = -1 erro desconhecido
 				this.cachedLocalSheetList.push({failed: true, errtype: /illegal character/.test(String(e)) ? -1 : (/SyntaxError/.test(String(e)) ? 2 : -1), fileName: sheets[i], reason: e});
 			}
 			if(listener != null) listener(Number(i) + 1, failed);
@@ -154,7 +154,7 @@ sheetmgr = {
 			sheetmgr.cachedOnlineSharedSheetInfoList = body.json().sheets;
 		});
 	},
-	//解析乐谱是耗时操作
+	//analisar partituras de música é uma operação demorada kkk
 	parseSongNote: function(raw) {
 		var r = [];
 		var t_time = 0;
@@ -175,41 +175,41 @@ sheetmgr = {
 	
 	pitch_suggestion: [{
 		name: "C",
-		places: ["境遇", "墓土四龙图", "雨林终点神庙音乐结束后"]
+		places: ["Situação", "Cemitério do sertão", "No final da Floresta Oculta, após o templo"]
 	}, {
 		name: "D♭",
-		places: ["云野八人升降梯", "雨林鱼骨图水母升起前" ]
+		places: ["Portão de 8 pessoas", "Lugar onde aparece a baleia na Floresta Oculta antes de surgir as água-vivas" ]
 	}, {
 		name: "D",
-		places: ["云野球形洞(通过云洞)", "雨林起点(不飞下去)",
+		places: ["Tunel esferico da Campina(indo para Aldeia)", "O início da Floresta Oculta(não voe para baixo)",
 				"霞谷终点冥想台", "墓土远古战场"]
 	}, {
 		name: "E♭",
-		places: ["雨林第一个门后右边的拱形洞内", "墓土破旧神庙"]
+		places: ["Dentro do buraco em arco à direita - atrás do primeiro portão da Floresta Oculta", "Templo destruído do Sertão"]
 	}, {
 		name: "E",
-		places: ["重生之路"]
+		places: ["Estrada para o renascimento(Eden)"]
 	}, {
 		name: "F",
-		places: ["雨林右隐藏图", "霞谷霞光城", "禁阁一楼"]
+		places: ["Area oculta à direita da floresta", "Cidadela do Vale", "1º Andar do Relicário"]
 	}, {
 		name: "G♭",
-		places: ["雨林鱼骨图释放被困海蜇或鳐后"]
+		places: ["Após o diagrama de arraias da Floresta Oculta liberar aguas-vivas e raias presas"]
 	}, {
 		name: "G",
-		places: ["雨林鱼骨图水母升起后"]
+		places: ["Depois que as aguas-vivas flutuarem"]
 	}, {
 		name: "A♭",
-		places: ["霞谷终点观众席"]
+		places: ["Fim da corrida - Vale do Triunfo"]
 	}, {
 		name: "A",
-		places: ["禁阁四楼"]
+		places: ["Relicário do Conhecimento, 4º andar"]
 	}, {
 		name: "B♭",
-		places: ["雨林终点和峡谷交界处等待背景音乐结束"]
+		places: ["Na junção da Floresta Oculta com a entrada(cânion) do Vale, espere o fim da música de fundo"]
 	}, {
 		name: "B",
-		places: ["雨林鱼骨图水母升起后", "霞谷任意赛道中", "禁阁二楼"]
+		places: ["Depois que as aguas-vivas flutuarem", "No vale, em qualquer local", "Relicário do Conhecimento, 2º andar"]
 	}],
 };
 
@@ -285,7 +285,7 @@ sheetplayer = {
 				java.lang.Thread.sleep(sheetplayer.nextInterval = Math.round(sheetplayer.nextInterval *  sheetplayer.speed));
 				sheetplayer.currentNote ++;
 			}
-			// 播放完自动下一首
+			// próxima música automática após tocar
 
 			if(!(sheetplayer.currentNote < sheetplayer.noteCount)) {
 				if(config.values.autoPlay && gui.player_panel.isShowing) {
@@ -296,7 +296,7 @@ sheetplayer = {
 						setTimeout(function(){
 							let sheet = sheetmgr.cachedLocalSheetList[random(0, sheetmgr.cachedLocalSheetList.length-1)]
 							if(!sheet.keyCount){
-								sheet.keyCount = 15 //默认键位
+								sheet.keyCount = 15 //posição-tecla padrão
 							}
 							gui.player_panel.__internal_showPanel(sheet);
 							// sheetplayer.stop();
@@ -371,7 +371,7 @@ config = {
 	_global_storage: null,
 	
 	values: {
-		currentVersion: 20,
+		currentVersion: 0.2,
 		gitVersion: "",
 		
 		key_coordinates15: [],
@@ -410,7 +410,7 @@ config = {
 		try {
 			android.os.Build.VERSION_CODES.R
 			sheetmgr.rootDir = android.os.Environment.getExternalStorageDirectory() + "/Documents/SkyAutoPlayer/sheets/";
-			if(this.values.tipOnAndroidR) toast("安卓11不允许外部应用读取应用私有文件夹，乐谱文件夹移至" + sheetmgr.rootDir);
+			if(this.values.tipOnAndroidR) toast("O Android 11 não permite que apps externos leiam pastas privadas de aplicativos, a pasta de pontuação é movida para" + sheetmgr.rootDir);
 		} catch (e) {}
 
 		files.ensureDir(sheetmgr.rootDir);
@@ -424,61 +424,61 @@ config = {
 	},
 	
 	checkVersion: function() {
-		this.values.gitVersion = http.get("https://gitee.com/stageguard/SkyAutoPlayerScript/raw/master/gitVersion").body.string();
+		this.values.gitVersion = http.get("https://gitee.com/iamjunioru/SkyAutoPlayer-BR/raw/master/gitVersion").body.string();
 		var periodVersion = this._global_storage.get("version", this.values.currentVersion);
 		var currentVersion = this.values.currentVersion;
 		if(periodVersion < currentVersion) {
 			config.fetchRepoFile("update_log.txt", this.values.gitVersion, function(body) {
 				gui.dialogs.showConfirmDialog({
-					title: "SkyAutoPlayer已更新",
-					text: "当前版本: " + currentVersion + " ← " + periodVersion + "\n\n更新日志: \n" + body.string(),
+					title: "SkyAutoPlayer foi atualizado",
+					text: "Versão Atual: " + currentVersion + " ← " + periodVersion + "\n\nLog de atualização: \n" + body.string(),
 					canExit: false,
-					buttons: ["确认"]
+					buttons: ["Confirmar"]
 				});
 			}, function(msg) {
-				toast("版本检查失败，无法获取更新信息");
+				toast("A verificação da versão falhou, não obtivemos informações de atualização");
 			});
 		}
 		this.save("version", currentVersion);
 	},
 	
 	fetchResources: function(listener) {
-		var remoteHost = "https://cdn.jsdelivr.net/gh/StageGuard/SkyAutoPlayerScript@" + this.values.gitVersion + "/resources/";
+		var remoteHost = "https://cdn.jsdelivr.net/gh/iamjunioru/SkyAutoPlayer-BR@" + this.values.gitVersion + "/resources/";
 		var resourceList = ["local.png", "online.png", "play.png", "pause.png", "refresh.png", "settings.png", "info.png", "download.png", "bin.png", "speedup.png", "search.png", "note.png", "user.png", "piano.png", "clock.png"/*, "filter.png"*/, "coolapk.png", "douyin.png", "github.png", "twitter.png", "bilibili.png"];
 		var localRootDir = android.os.Environment.getExternalStorageDirectory() + "/Documents/SkyAutoPlayer/bitmaps/";
 		var downloadQueue = [];
 		var tryCount = 1;
 		try {
 			files.createWithDirs(localRootDir);
-			listener("加载资源中...");
+			listener("Carregando recursos...");
 			resourceList.map(function(element, i) {
 				var absolutePath = files.join(localRootDir, element);
 				if(files.exists(absolutePath)) {
 					try {
-						listener("加载资源中: " + element);
+						listener("Carregando recursos: " + element);
 						config.bitmaps[files.getNameWithoutExtension(absolutePath)] = android.graphics.Bitmap.createBitmap(android.graphics.BitmapFactory.decodeFile(absolutePath));
 					} catch(e) {
-						listener("加载失败: " + element);
+						listener("Falha ao carregar: " + element);
 						downloadQueue.push(element);
 					}
 				} else {
-					listener("无本地资源，进入下载队列: " + element);
+					listener("Sem recursos locais, entre na fila de download: " + element);
 					downloadQueue.push(element);
 				}
 			});
 			if(downloadQueue.length == 0) {
-				listener("资源加载完成");
-				java.lang.Thread.sleep(500); //为了方便看清
+				listener("Carregamento de recursos concluído!");
+				java.lang.Thread.sleep(500); //p ficar mais fácil de ver
 				return;
 			}
 			while (downloadQueue.length != 0 && tryCount <= 5) {
-				listener("第" + tryCount + "次尝试下载资源，共需下载" + downloadQueue.length + "项资源");
-				java.lang.Thread.sleep(750); //为了方便看清
+				listener("Primeiro" + tryCount + "Tenta baixar recursos, um total de download" + downloadQueue.length + "Recurso");
+				java.lang.Thread.sleep(750); //Para tornar mais fácil de ver
 				var tmpQueue = [];
 				for(var i in downloadQueue) tmpQueue.push(downloadQueue[i]);
 				var iterator = 0;
 				tmpQueue.map(function(element, i) {
-					listener("下载资源中: " + element);
+					listener("Baixe recursos: " + element);
 					config.fetchRepoFile("resources/" + element, config.values.gitVersion, function(body) {
 						var absolutePath = files.join(localRootDir, element);
 						files.create(absolutePath);
@@ -487,42 +487,42 @@ config = {
 						downloadQueue.splice(iterator, 1);
 					}, function(msg) {
 						iterator++;
-						listener("资源" + element + "下载/加载失败: " + e);
-						java.lang.Thread.sleep(500); //为了方便看清
+						listener("Recursos" + element + "Falha de download/carregamento: " + e);
+						java.lang.Thread.sleep(500); //p ficar mais fácil de ver
 					});
 					
 				});
 				tryCount ++;
 			}
-			//处理结果
+			//resultado do processo
 			if(tryCount > 5) {
-				listener(new Error("以下资源下载失败：" + downloadQueue))
+				listener(new Error("Falha ao baixar os seguintes recursos: " + downloadQueue))
 			} else {
-				listener("资源下载完成");
-				java.lang.Thread.sleep(1000); //为了方便看清
+				listener("Download de recursos completo!");
+				java.lang.Thread.sleep(1000); //p ficar mais fácil de ver
 			}
 		} catch(error) {
-			listener(new Error("资源下载时发生了问题" + error));
+			listener(new Error("Ocorreu um problema ao baixar os recursos" + error));
 		}
 		
 	},
 	//jsdelivr cdn需要指定repo版本, gitee和github则不用
 	//fetch顺序为 gitee raw content → jsdelivr cdn → github raw content
 	fetchRepoFile: function(path, gitVersion, successCbk, failCbk) {
-		//就用最蠢的if来判断吧
-		var resp = http.get(encodeURI("https://gitee.com/stageguard/SkyAutoPlayerScript/raw/master/" + path));
+		//Basta usar o mais estúpido se para julgar
+		var resp = http.get(encodeURI("https://gitee.com/iamjunioru/SkyAutoPlayer-BR/raw/master/" + path));
 		if(resp.statusCode >= 200 && resp.statusCode < 300) {
 			successCbk(resp.body);
 			return;
 		} else {
 			var errorCollector = resp.statusCode + ": " + resp.statusMessage + "\n";
-			resp = http.get(encodeURI("https://cdn.jsdelivr.net/gh/StageGuard/SkyAutoPlayerScript" + (gitVersion == null ? "" : ("@" + gitVersion)) + "/" + path));
+			resp = http.get(encodeURI("https://cdn.jsdelivr.net/gh/iamjunioru/SkyAutoPlayer-BR" + (gitVersion == null ? "" : ("@" + gitVersion)) + "/" + path));
 			if(resp.statusCode >= 200 && resp.statusCode < 300) {
 				successCbk(resp.body);
 				return;
 			} else {
 				errorCollector += resp.statusCode + ": " + resp.statusMessage + "\n";
-				resp = http.get(encodeURI("https://raw.githubusercontent.com/StageGuard/SkyAutoPlayerScript/master/" + path));
+				resp = http.get(encodeURI("https://raw.githubusercontent.com/iamjunioru/SkyAutoPlayer-BR/master/" + path));
 				if(resp.statusCode >= 200 && resp.statusCode < 300) {
 					successCbk(resp.body);
 					return;
@@ -981,7 +981,7 @@ gui = {
 						//skip.setChecked(Boolean(s.canSkip));
 						skip.setLayoutParams(android.widget.LinearLayout.LayoutParams(-2, -2, 0));
 						skip.getLayoutParams().setMargins(0, 0, 0, 10 * dp)
-						skip.setText("不再提示");
+						skip.setText("Não lembrar novamente");
 						skip.setTextColor(gui.config.colors[config.values.theme].sec_text)
 						layout.addView(skip);
 					}
@@ -1203,11 +1203,11 @@ gui = {
 			}
 		},
 		
-		//internal methods
+		//metodos internos
 		__internal_show: function s(content) { gui.run(function(){
 			s.index = gui.main.current = content.index;
 			s.initial = false;
-			if(!gui.main.isShowing) { //create a new window and show content view
+			if(!gui.main.isShowing) { //crie uma nova janela e mostre a visualização do conteúdo
 				gui.main._global_base = new android.widget.LinearLayout(ctx);
 				gui.main._global_base.setGravity(android.view.Gravity.CENTER | android.view.Gravity.CENTER);
 				gui.main._global_base.setOrientation(android.widget.LinearLayout.VERTICAL);
@@ -1325,10 +1325,10 @@ gui = {
 				
 				if(s._anim != null) s._anim();
 				if(!config.values.skipOpenWindowTip) {
-					toast("拖动标题栏的标题文字来移动悬浮窗位置。");
+					toast("Arraste o texto do cabeçalho na barra acima para mover a posição da janela flutuante.");
 					config.values.skipOpenWindowTip = config.save("skip_open_window_tip", true);
 				}
-			} else { //window is showing, change content view
+			} else { //a janela está sendo exibida, alterar a visualização do conteúdo
 				if(gui.main.current_navigation_selection == s.index) return;
 				if(content.title != null) gui.main._global_title.setText(content.title);
 				
@@ -1375,7 +1375,7 @@ gui = {
 
 			if(gui.main.views[s.index].func == null || !gui.main.views[s.index].func.length) {
 				if(gui.main.func_showing) {
-					//no extra func and previous page has func
+					//nenhuma função extra e a página anterior tem função
 					gui.main.func_showing = false;
 					gui.utils.value_animation("Float", 0, 1, 200 , new android.view.animation.DecelerateInterpolator(), function(anim) {
 						for(var i in gui.main._glonal_func) {
@@ -1617,7 +1617,7 @@ gui = {
 								onTouchFunction.offsetY = s.y - event.getRawY();
 							break;
 							case event.ACTION_UP: 
-								gui.key_coordinate_navigation._global_text.setText("键" + (gui.key_coordinate_navigation.current_index + 1) + "坐标已设置: [" + event.getRawX() + ", " + event.getRawY() + "]");
+								gui.key_coordinate_navigation._global_text.setText("Tecla" + (gui.key_coordinate_navigation.current_index + 1) + "坐标已设置: [" + event.getRawX() + ", " + event.getRawY() + "]");
 								keyTargetedCbk([event.getRawX(), event.getRawY()]);
 								gui.utils.value_animation("Float", 1, 0, 200 , new android.view.animation.DecelerateInterpolator(), function(anim) {
 									gui.key_coordinate_navigation._global_base.setAlpha(anim.getAnimatedValue());
@@ -1657,7 +1657,7 @@ gui = {
 					gui.key_coordinate_navigation._global_base.setAlpha(anim.getAnimatedValue());
 					gui.key_coordinate_navigation._global_text.setAlpha(anim.getAnimatedValue());
 				});
-				gui.key_coordinate_navigation._global_text.setText("移动\"\u26d2\"至目标位置来设置第" + (gui.key_coordinate_navigation.current_index + 1) + "个键坐标");
+				gui.key_coordinate_navigation._global_text.setText("Mover\"\u26d2\"Para a posição alvo para definir a " + (gui.key_coordinate_navigation.current_index + 1) + " Coordenadas chave");
 				gui.key_coordinate_navigation.isShowing = true;
 			}
 		})},
@@ -1739,7 +1739,7 @@ gui = {
 				gui.player_panel._global_text.setLayoutParams(new android.widget.RelativeLayout.LayoutParams(-2, -2));
 				gui.player_panel._global_text.setTextColor(gui.config.colors[config.values.theme].text);
 				gui.player_panel._global_text.setTextSize(14);
-				gui.player_panel._global_text.setText("解析中...");
+				gui.player_panel._global_text.setText("Análise...");
 				gui.player_panel._global_text.setSingleLine(true);
 				gui.player_panel._global_text.setEllipsize(android.text.TextUtils.TruncateAt.END);
 				//gui.player_panel._global_text.setPadding(dp * 5, dp * 5, dp * 5, dp * 5);
@@ -1934,7 +1934,7 @@ gui = {
 				gui.player_panel.refreshStatus();
 				
 				if(!config.values.skipOpenPlayerPanelWindowTip) {
-					toast("拖动标题栏的标题文字来移动弹奏控制面板悬浮窗。");
+					toast("Arraste o texto do cabeçalho na barra acima para mover a posição do player.");
 					config.values.skipOpenPlayerPanelWindowTip = config.save("skip_open_player_panel_window_tip", true);
 				}
 				
@@ -1965,7 +1965,7 @@ gui = {
 						s.speedl.setAlpha(0);
 						
 						gui.player_panel.refreshStatus();
-						//一点都不优雅
+						//Nem um pouco elegante
 						var h = new android.os.Handler();
 						h.postDelayed(function() {
 							gui.utils.value_animation("Float", 0, 1, 300 , new android.view.animation.LinearInterpolator(), function(anim) {
@@ -2047,17 +2047,17 @@ gui.run(function(){
 		prompt.setLayoutParams(new android.widget.RelativeLayout.LayoutParams(-2, -2));
 		prompt.getLayoutParams().setMargins(dp * 15, dp * 5, dp * 15, dp * 15);
 		prompt.setGravity(android.view.Gravity.CENTER | android.view.Gravity.CENTER);
-		prompt.setText(android.text.Html.fromHtml("当你发现什么事情都没有发生时<br>也许你应该看看是否授予了Auto.js<u><b>悬浮窗权限</u></b><br><br>" + (function() {
+		prompt.setText(android.text.Html.fromHtml("SkyAutoPlayer - Script feito por @iamjunioru<br>Se interessa em comprar o script? Entre em contato:<br><b>Discord: dream#2001 - Whatsapp: (88) 9.9495-3035</b><br>Não aconteceu nada?<br>Talvez você deva ver se Auto.js tem<u><b> permissões de janela flutuante</u></b><br><br>" + (function() {
 			if(app.autojs.versionCode == 461) {
-				return "Auto.js版本为 <b>4.1.1 Alpha2</b>"
+				return "A versão do Auto.js é <b>4.1.1 Alpha2</b>"
 			} else {
-				return "<font color=red>Auto.js版本为 <b>" + app.autojs.versionName + "</b>，不保证稳定性！</font><br>建议使用 <b>4.1.1 Alpha2</b> 版本！<br><b>4.1.1 Alpha2</b> 版本下载: <a href=https://github.com/Ericwyn/Auto.js/releases/tag/V4.1.1.Alpha2>https://github.com/Ericwyn/Auto.js/releases/tag/V4.1.1.Alpha2</a>"
+				return "<font color=red>A versão atual do Auto.js é - <b>" + app.autojs.versionName + "</b>，Bugs podem ocorrer dependendo da versão！</font><br>Recomendo usar Auto.js versão <b>4.1.1 Alpha2</b>！<br><b>4.1.1 Alpha2</b> Download da versão: <a href=https://github.com/Ericwyn/Auto.js/releases/tag/V4.1.1.Alpha2>https://github.com/Ericwyn/Auto.js/releases/tag/V4.1.1.Alpha2</a>"
 			}
 		}())));
 		layout.addView(prompt);
 		var btn = new android.widget.Button(ctx);
 		btn.setLayoutParams(new android.widget.LinearLayout.LayoutParams(-2, -2));
-		btn.setText("强制退出");
+		btn.setText("Forçar saída");
 		btn.setOnClickListener(new android.view.View.OnClickListener({
 			onClick: function() {
 				java.lang.System.exit(0);
@@ -2070,10 +2070,10 @@ gui.run(function(){
 
 gui.dialogs.showProgressDialog(function(o) {
 	o.setIndeterminate(true);
-	o.setText("加载配置中...");
+	o.setText("Carregando configurações...");
 	config.init();
 	config.checkVersion();
-	o.setText("加载资源中...");
+	o.setText("Carregando recursos...");
 	config.fetchResources(function(msg) {
 		if(msg instanceof Error) {
 			o.close();
@@ -2218,7 +2218,7 @@ gui.dialogs.showProgressDialog(function(o) {
 		layout.addView(infoLayout);
 
 		var sugPrompt = new android.widget.TextView(ctx);
-		sugPrompt.setText("建议弹奏地点:");
+		sugPrompt.setText("Localização sujerida para tocar:");
 		sugPrompt.setLayoutParams(new android.widget.LinearLayout.LayoutParams(-2, -2));
 		sugPrompt.setGravity(android.view.Gravity.LEFT | android.view.Gravity.CENTER);
 		sugPrompt.setTextColor(gui.config.colors[config.values.theme].text);
@@ -2274,7 +2274,7 @@ gui.dialogs.showProgressDialog(function(o) {
 				return rBitmap;
 			};
 			var socialPrompt = new android.widget.TextView(ctx);
-			socialPrompt.setText("查看作者:");
+			socialPrompt.setText("Ver autor:");
 			socialPrompt.setLayoutParams(new android.widget.LinearLayout.LayoutParams(-2, -2));
 			socialPrompt.setGravity(android.view.Gravity.LEFT | android.view.Gravity.CENTER);
 			socialPrompt.setTextColor(gui.config.colors[config.values.theme].text);
@@ -2296,7 +2296,7 @@ gui.dialogs.showProgressDialog(function(o) {
 				socialImage.setImageBitmap(filterBitmap(config.bitmaps[item.social[0].platform], android.graphics.Color.parseColor(colorPicker(item.social[0].platform))));
 				socialLayout.addView(socialImage);
 				var socialPrompt1 = new android.widget.TextView(ctx);
-				socialPrompt1.setText(android.text.Html.fromHtml(("在 <font color=" + colorPicker(item.social[0].platform) + ">" + item.social[0].name +"</font> 查看作者")));
+				socialPrompt1.setText(android.text.Html.fromHtml(("não <font color=" + colorPicker(item.social[0].platform) + ">" + item.social[0].name +"</font> ver autor")));
 				socialPrompt1.setLayoutParams(new android.widget.LinearLayout.LayoutParams(-2, dp * 34));
 				socialPrompt1.setGravity(android.view.Gravity.LEFT | android.view.Gravity.CENTER);
 				socialPrompt1.setTextColor(gui.config.colors[config.values.theme].text);
@@ -2335,8 +2335,8 @@ gui.dialogs.showProgressDialog(function(o) {
 	});
 	gui.main.addPage({
 		index: 0, 
-		title: "本地乐谱", 
-		navigation_title: "本地乐谱",
+		title: "@iamjunioru - Partituras locais", 
+		navigation_title: "Local",
 		navigation_icon: "local",
 		func: [{
 			icon: "refresh",
@@ -2399,7 +2399,7 @@ gui.dialogs.showProgressDialog(function(o) {
 					element.v_author.getLayoutParams().addRule(android.widget.RelativeLayout.ALIGN_PARENT_LEFT);
 					element.v_author.setTextSize(14);
 					element.v_author.setTextColor(gui.config.colors[config.values.theme].sec_text);
-					element.v_author.setText("键数: " + element.songNotes.length + " - BPM: " + element.bpm);
+					element.v_author.setText("Número de teclas: " + element.songNotes.length + " - BPM: " + element.bpm);
 					element.v_relative.addView(element.v_author);
 					
 					element.v_play = new android.widget.ImageView(ctx);
@@ -2418,10 +2418,10 @@ gui.dialogs.showProgressDialog(function(o) {
 							if(gui.main.isShowing) {
 								if(!element.keyCount) {
 									gui.dialogs.showConfirmDialog({
-										title: "设置键位数",
-										text: "这是一个本地乐谱，请设置这个乐谱的键位数",
+										title: "Defina o número de teclas/chaves",
+										text: "Esta é uma partitura local. Defina o número de teclas para esta partitura:",
 										canExit: true,
-										buttons: ["8 键位", "15 键位"],
+										buttons: ["• 8 teclas", "• 15 teclas"],
 										callback: function(id) {
 											files.write(files.join(sheetmgr.rootDir, element.fileName), (function() {
 												var readable = files.open(files.join(sheetmgr.rootDir, element.fileName), "r", sheetmgr.encoding);
@@ -2430,20 +2430,20 @@ gui.dialogs.showProgressDialog(function(o) {
 												parsed.keyCount = id == 0 ? (element.keyCount = 8) : (element.keyCount = 15)
 												return "[" + JSON.stringify(parsed) + "]";
 											}()), sheetmgr.encoding);
-											toast("已将 " + element.name + " 设置为 " + element.keyCount + " 键乐谱\n请再次点击弹奏按钮。\n长按乐谱以重新设置键位数。");
+											toast("foi " + element.name + " Definir como " + element.keyCount + " Pontuação de tecla\nPor favor, clique no botão play novamente.\nPressione longamente a pontuação para redefinir o número de teclas.");
 										},
 									});
 								} else {
 									switch(element.keyCount) {
 										case 8: {
 											if(config.values.key_coordinates8.length != 8) {
-												toast("未设置8键键位坐标或坐标数据错误，请前往设置页设置键位坐标");
+												toast("8 coordenadas de tecla não está definida ou os dados da coordenada estão errados，vá para a página de configurações para definir a posição delas.");
 												return true;
 											}
 										};break;
 										case 15: {
 											if(config.values.key_coordinates15.length != 15) {
-												toast("未设置15键键位坐标或坐标数据错误，请前往设置页设置键位坐标");
+												toast("8 coordenadas de tecla não está definida ou os dados da coordenada estão errados，vá para a página de configurações para definir a posição delas.");
 												return true;
 											}
 										};break;
@@ -2476,10 +2476,10 @@ gui.dialogs.showProgressDialog(function(o) {
 					onClick: function() {
 						var path = files.join(sheetmgr.rootDir, element.fileName);
 						gui.dialogs.showConfirmDialog({
-							title: "删除文件",
-							text: "确认要删除 " + path + " 吗？\n该操作不可恢复！",
+							title: "Deletar arquivos",
+							text: "Confirme para excluir " + path + " Tem certeza？\nNão há como voltar atrás！",
 							canExit: true,
-							buttons: ["确认", "取消"],
+							buttons: ["Confirmar", "Cancelar"],
 							callback: function(id) {
 								if(id == 0) {
 									files.remove(path);
@@ -2503,44 +2503,44 @@ gui.dialogs.showProgressDialog(function(o) {
 						switch(item.index) {
 							case 0: {
 								gui.dialogs.showConfirmDialog({
-									title: "如何导入本地乐谱",
-									text: android.text.Html.fromHtml(String("本地乐谱文件夹在" + (function(){
+									title: "Deseja saber como importar partituras locais?",
+									text: android.text.Html.fromHtml(String("A pasta de partituras locais está em" + (function(){
 										try {
 											android.os.Build.VERSION_CODES.R
-											return "<b>Android标准文档文件夹</b>下"
+											return "<b>Pasta de documentos padrão Android</b>sob"
 										} catch (e) {
-											return "<b>SkyStudio的乐谱存储位置</b>";
+											return "<b>Local de armazenamento de partituras musicais do SkyStudio</b>";
 										}
 									}()) + "\n" + 
 										"<u><b>" + sheetmgr.rootDir + "</u></b>\n" + 
-										"将外部乐谱复制进这个文件夹即可\n\n" + 
-										"注意：\n" + 
-										"SkyStudio对乐谱的存储/读取使用<u><b>" + sheetmgr.encoding.toUpperCase() + "</u></b>编码\n" + 
-										"请确保外部乐谱的编码与SkyStudio使用的编码一致\n").replace(new RegExp("\x0a", "gi"), "<br>")),
+										"Copie a partitura externa para esta pasta\n\n" + 
+										"Nota：\n" + 
+										"Uso do SkyStudio para armazenamento/leitura de partituras musicais<u><b>" + sheetmgr.encoding.toUpperCase() + "</u></b>编码\n" + 
+										"Certifique-se de que a codificação da partitura externa seja consistente com a codificação usada pelo SkyStudio\n").replace(new RegExp("\x0a", "gi"), "<br>")),
 									canExit: true,
 									skip: function(checked) {
 										config.values.skipImportLocalSheetTip = config.save("skip_import_local_sheet_tip", checked);
 										if(checked) s.ns0_listAdapterController.removeByIndex(pos, true);
 									},
-									buttons: ["确认"]
+									buttons: ["Confirmar"]
 								});
 								break;
 							}
 							case 1: {
 								gui.dialogs.showConfirmDialog({
-									title: "修改乐谱键位数",
-									text: "版本15增加了对不同键位乐器(8键位和15键位)乐谱的支持，它们使用不同的坐标数据。\n" + 
-										"当前已存储在本地的乐谱(外部导入的乐谱或在版本15之前从共享乐谱下载的乐谱)，它们没有键位信息，SkyAutoPlayerScript无法确认它是8键位乐谱还是15键位乐谱。\n" + 
-										"共享乐谱信息已更新，现在下载的共享乐谱它已经包含了乐谱键位信息，不需要再设置。\n" + 
-										"点击开始弹奏按钮时，若无键位信息，则会弹出对话框以选择乐谱键位，SkyAutoPlayerScript会保存键位信息到乐谱。\n" + 
-										"如果因为一些原因设置了错误的键位信息，可以长按乐谱来重新设置。\n\n" + 
-										"p.s.: 需要重新设置15键键位坐标。",
+									title: "Modifique o número de teclas de pontuação",
+									text: "A versão 15 adiciona suporte para pontuações de diferentes instrumentos principais(8 e 15 teclas), que usam dados de coordenadas diferentes.\n" + 
+										"Partituras musicais atualmente armazenadas localmente(partituras importadas externamente ou partituras baixadas de partituras compartilhadas antes da versão 15)，Eles não possuem informações importantes e o SkyAutoPlayerScript não pode confirmar se é uma partitura de 8 ou 15 teclas.\n" + 
+										"As informações da pontuação compartilhada foram atualizadas. Agora, a pontuação compartilhada baixada já contém as informações principais da pontuação, portanto, não há necessidade de defini-la novamente.\n" + 
+										"Quando você clica no botão para iniciar a reprodução, se não houver informações da posição da chave, uma caixa de diálogo aparecerá para selecionar a posição da chave da pontuação e o SkyAutoPlayerScript salvará as informações da posição da chave na partitura.\n" + 
+										"Se você definir a informação chave errada por algum motivo, você pode pressionar longamente a pontuação para zerá-la.\n\n" + 
+										"p.s.: Você precisa redefinir a posição da chave 15.",
 									canExit: true,
 									skip: function(checked) {
 										config.values.skipChangeKeyCountTip = config.save("skip_change_key_count_tip", checked);
 										if(checked) s.ns0_listAdapterController.removeByIndex(pos, true);
 									},
-									buttons: ["确认"]
+									buttons: ["Confirmar"]
 								});
 								break;
 							}
@@ -2549,14 +2549,14 @@ gui.dialogs.showProgressDialog(function(o) {
 					}
 					if(item.failed) {
 						gui.dialogs.showConfirmDialog({
-							title: "加载" + item.fileName + "失败",
-							text: android.text.Html.fromHtml(String("加载乐谱" + item.fileName + "失败\n\n原因：\n" + item.reason + "\n\n请检查以下内容：\n" + 
-								(item.errtype == -1 ? "<b>1. 谱子编码是否为UTF16-LE</b>\n" : "<s>1. 谱子编码是否为UTF16-LE</s>\n") + 
-								(item.errtype == 1 ? "<b>2. 谱子是否为未加密的JSON格式</b>\n" : "<s>2. 谱子是否为未加密的JSON格式</s>\n") + 
-								(item.errtype == 2 ? "<b>3. 谱子是否有JSON语法错误</b>" : "<s>3. 谱子是否有JSON语法错误</s>")
+							title: "carga" + item.fileName + "falha",
+							text: android.text.Html.fromHtml(String("Carregar partituras" + item.fileName + "falha\n\nmotivo：\n" + item.reason + "\n\nPor favor, verifique o seguinte：\n" + 
+								(item.errtype == -1 ? "<b>1. Se a codificação da partitura é UTF16-LE</b>\n" : "<s>1. Se a codificação da partitura é UTF16-LE</s>\n") + 
+								(item.errtype == 1 ? "<b>2. Se a pontuação está no formato JSON não criptografado</b>\n" : "<s>2. Se a pontuação está no formato JSON não criptografado</s>\n") + 
+								(item.errtype == 2 ? "<b>3. A partitura tem erros de sintaxe JSON</b>" : "<s>3. A partitura tem erros de sintaxe JSON</s>")
 							).replace(new RegExp("\x0a", "gi"), "<br>")), 
 							canExit: true,
-							buttons: ["确认"]
+							buttons: ["Confirmar"]
 						});
 					} else { 
 						gui.dialogs.showDialog(gui.getViewMaker("sheetInfo")(item), -2, -2, null, true);
@@ -2569,10 +2569,10 @@ gui.dialogs.showProgressDialog(function(o) {
 					var item = s.ns0_listAdapterController.get(pos);
 					if(!item.failed && item.type == 0) {
 						gui.dialogs.showConfirmDialog({
-							title: "设置键位数",
-							text: "这是一个本地乐谱，请设置这个乐谱的键位数",
+							title: "Defina o número de teclas/chaves",
+							text: "Esta é uma partitura local. Defina o número de teclas para esta partitura:",
 							canExit: true,
-							buttons: ["8 键位", "15 键位"],
+							buttons: ["• 8 teclas", "• 15 teclas"],
 							callback: function(id) {
 								files.write(files.join(sheetmgr.rootDir, item.fileName), (function() {
 									var readable = files.open(files.join(sheetmgr.rootDir, item.fileName), "r", sheetmgr.encoding);
@@ -2581,7 +2581,7 @@ gui.dialogs.showProgressDialog(function(o) {
 									parsed.keyCount = id == 0 ? (item.keyCount = 8) : (item.keyCount = 15)
 									return "[" + JSON.stringify(parsed) + "]";
 								}()), sheetmgr.encoding);
-								toast("已将 " + item.name + " 设置为 " + item.keyCount + " 键乐谱\n请再次点击弹奏按钮。\n长按乐谱以重新设置键位数。");
+								toast("Foi " + item.name + " Definir como " + item.keyCount + " Pontuação chave\nPor favor, clique no botão play novamente.\nPressione na partitura para redefinir o número de teclas");
 							},
 						});
 					}
@@ -2621,19 +2621,19 @@ gui.dialogs.showProgressDialog(function(o) {
 						s.ns0_listView.setAlpha(1);
 						if(!config.values.skipImportLocalSheetTip) s.ns0_listAdapterController.add({
 							type: -1,
-							title: "如何导入本地乐谱",
+							title: "Como importar partituras locais",
 							index: 0
-						});//上传乐谱提示
+						});//Dicas de pontuação de upload
 						if(!config.values.skipChangeKeyCountTip) s.ns0_listAdapterController.add({
 							type: -1,
-							title: "修改乐谱键位数",
+							title: "Modifique o número de teclas de partitura",
 							index: 1
-						});//修改乐谱键位提示
+						});//Modifique a posição-chave da partitura
 						s.ns0_listAdapterController.notifyChange();
 						threads.start(function() {
 							sheetmgr.getLocalSheetList(isForce, function(successCount, failedCount) {
 								gui.run(function(){
-									gui.main._global_title.setText("加载中: 共" + successCount + "首乐谱(" + failedCount + "失败)");
+									gui.main._global_title.setText("Carregando " + successCount + " partituras ~" + failedCount + " falhou");
 								});
 							}).map(function(e, i) {
 								gui.run(function(){
@@ -2664,8 +2664,8 @@ gui.dialogs.showProgressDialog(function(o) {
 	});
 	gui.main.addPage({
 		index: 1, 
-		title: "共享乐谱",
-		navigation_title: "共享乐谱", 
+		title: "Partituras compartilhadas",
+		navigation_title: "Nuvem", 
 		navigation_icon: "online",
 		func: [{
 			icon: "refresh",
@@ -2780,7 +2780,7 @@ gui.dialogs.showProgressDialog(function(o) {
 									switch(r.status) {
 										case 1: {
 											gui.run(function() {
-												element.v_status.setText("下载中...");
+												element.v_status.setText("baixando...");
 												element.v_relative.addView(element.v_status);
 												element.v_relative.addView(element.v_progress);
 												element.isShowingStatusBar = true;
@@ -2795,13 +2795,13 @@ gui.dialogs.showProgressDialog(function(o) {
 										}
 										case 2: {
 											if(gui.main.isShowing) gui.run(function() {
-												element.v_status.setText("解析中...");
+												element.v_status.setText("Análisando....");
 											});
 											break;
 										}
 										case 3: {
 											if(gui.main.isShowing) { gui.run(function() { 
-												toast("下载完成: " + element.name + "\n请在本地曲谱页面刷新");
+												toast("Transferência concluída: " + element.name + "\nAtualize na página de partitura local");
 												gui.utils.value_animation("Float", 1, 0, 150, new android.view.animation.DecelerateInterpolator(), function(anim) {
 													element.v_progress.setAlpha(anim.getAnimatedValue());
 													element.v_status.setAlpha(anim.getAnimatedValue());
@@ -2817,7 +2817,7 @@ gui.dialogs.showProgressDialog(function(o) {
 										}
 										case -1: {
 											if(gui.main.isShowing) { gui.run(function() { 
-												toast("下载" + element.name + "失败: " + r.msg);
+												toast("baixar" + element.name + "falha: " + r.msg);
 												gui.utils.value_animation("Float", 1, 0, 150, new android.view.animation.DecelerateInterpolator(), function(anim) {
 													element.v_progress.setAlpha(anim.getAnimatedValue());
 													element.v_status.setAlpha(anim.getAnimatedValue());
@@ -2871,23 +2871,23 @@ gui.dialogs.showProgressDialog(function(o) {
 							switch(item.index) {
 								case 0: {
 									gui.dialogs.showConfirmDialog({
-										title: "如何上传乐谱",
-										text: "共有两种方式可以上传乐谱：\n\n" + 
-											"①酷安私信@StageGuard，发送时请附带简介，曲谱链接(百度云或其他云盘都可)\n" + 
-											"②在github fork StageGuard/SkyAutoplayerScript\n" + 
-											"在shared_sheets文件夹添加你的曲谱，并按照格式修改shared_sheets.json\n" + 
-											"并提出 Pull Request 合并申请\n\n" + 
-											"注：若是转载转载请注明原作者同意\n\n" + 
-											"如果所有人都白嫖，那么这个列表将永远也不会扩充",
+										title: "Como fazer upload de partituras",
+										text: "Existem duas maneiras de fazer upload de pontuações：\n\n" + 
+											"①Mensagem privada legal @iamjunioru, inclua uma breve introdução e um link para a pontuação ao enviá-la (Drive ou outros sites de download)\n" + 
+											"②Fork iamjunioru/SkyAutoplayer-BR no github\n" + 
+											"Adicione sua partitura na pasta shared_sheets e modifique shared_sheets.json de acordo com o formato\n" + 
+											"E enviar um pull request\n\n" + 
+											"Nota: Se pegou de outra pessoa, indique o autor original\n\n" + 
+											"Se ñinguém contribuir, então a lista nunca se expandirá",
 										canExit: true,
 										skip: function(checked) {
 											config.values.skipOnlineUploadTip = config.save("skip_online_upload_tip", checked);
 											if(checked) s.ns1_listAdapterController.removeByIndex(pos, true);
 										},
-										buttons: ["打开酷安", "打开Github", "取消"],
+										buttons: ["Abrir", "Abra o Github", "Cancelar"],
 										callback: function(id) {
 											if(id == 0) {
-												if(!app.launch("com.coolapk.market")) toast("应用 酷安 不存在！");
+												if(!app.launch("com.coolapk.market")) toast("O aplicativo não existe!");
 											} else if(id == 1) {
 												app.openUrl("https://github.com/StageGuard/SkyAutoplayerScript/");
 											}
@@ -2897,20 +2897,20 @@ gui.dialogs.showProgressDialog(function(o) {
 								}
 								case 1: {
 									gui.dialogs.showConfirmDialog({
-										title: "乐谱共享声明",
-										text: android.text.Html.fromHtml(String("此列表共享的乐谱在\n<a href=https://github.com/StageGuard/SkyAutoPlayerScript>github.com/StageGuard/SkyAutoPlayerScript</a>\n均可以找到\n\n" + 
-											"用户原创乐谱<b><u>仅在SkyAutoplayerScript共享并使用</u></b>，\n" + 
-											"转载至其他平台请<b>取得作者授权</b>！\n\n" + 
-											"转载在此共享列表的乐谱均会标明\n" + 
-											"转载请</b>注明原作者授权</b>或<b>遵循原作者意愿</b>\n\n" + 
-											"此声明没有强制执行性，这是个人素质的体现\n" + 
-											"<b><u>非法利益不可取</b></u>").replace(new RegExp("\x0a", "gi"), "<br>")),
+										title: "Declaração de compartilhamento de partituras",
+										text: android.text.Html.fromHtml(String("As partituras compartilhadas por esta lista estão em -\n<a href=https://github.com/StageGuard/SkyAutoPlayerScript>github.com/StageGuard/SkyAutoPlayerScript</a>\n, confere lá!\n\n" + 
+											"Partitura original do usuário<b><u>Compartilhe e use apenas no SkyAutoplayerScript</u></b>，\n" + 
+											"Divulgue para outras plataformas, por favor<b>Obtenha autorização do autor</b>！\n\n" + 
+											"As partituras reproduzidas nesta lista compartilhada serão marcadas\n" + 
+											"Divulgue</b>Indique a autorização do autor original</b>ou<b>Siga os desejos do autor original</b>\n\n" + 
+											"Esta declaração não é exequível, é uma manifestação de qualidades pessoais\n" + 
+											"<b><u>Benefícios ilegais são indesejáveis</b></u>").replace(new RegExp("\x0a", "gi"), "<br>")),
 										canExit: true,
 										skip: function(checked) {
 											config.values.skipOnlineSharedSheetCTip = config.save("skip_shared_sheet_c_tip", checked);
 											if(checked) s.ns1_listAdapterController.removeByIndex(pos, true);
 										},
-										buttons: ["我已了解"]
+										buttons: ["Eu entendi"]
 									});
 									break;
 								}
@@ -2957,7 +2957,7 @@ gui.dialogs.showProgressDialog(function(o) {
 			s.ns1_searchEditText.setTextSize(15);
 			s.ns1_searchEditText.setTextColor(gui.config.colors[config.values.theme].text);
 			s.ns1_searchEditText.setHintTextColor(gui.config.colors[config.values.theme].sec_text);
-			s.ns1_searchEditText.setHint("按回车开始搜索");
+			s.ns1_searchEditText.setHint("Pressione Enter para iniciar a pesquisa");
 			s.ns1_searchEditText.setAlpha(0);
 			s.ns1_searchEditText.setOnClickListener(new android.view.View.OnClickListener({
 				onClick: function(view) {
@@ -3027,17 +3027,17 @@ gui.dialogs.showProgressDialog(function(o) {
 					if(anim.getAnimatedValue() == 0) {
 						if(!config.values.skipOnlineUploadTip) s.ns1_listAdapterController.add({
 							type: -1,
-							title: "如何上传乐谱",
+							title: "Como fazer upload de partituras",
 							index: 0
-						});//上传乐谱提示
+						});//Dicas de upload de partituras
 						if(!config.values.skipOnlineSharedSheetCTip) s.ns1_listAdapterController.add({
 							type: -1,
-							title: "乐谱共享声明",
+							title: "Declaração de compartilhamento de partituras",
 							index: 1
-						});//乐谱共享问题提示
+						});//Dicas para compartilhar partituras
 						s.ns1_listAdapterController.notifyChange();
 						s.ns1_listView.setAlpha(1);
-						gui.main._global_title.setText("获取列表中...");
+						gui.main._global_title.setText("Obtendo lista...");
 						threads.start(function() {
 							var list = [];
 							if(typeof(filterBlock) == "function") {
@@ -3069,8 +3069,8 @@ gui.dialogs.showProgressDialog(function(o) {
 	});
 	gui.main.addPage({
 		index: 2, 
-		title: "设置", 
-		navigation_title: "设置",
+		title: "Configurações", 
+		navigation_title: "Configurações",
 		navigation_icon: "settings",
 		view: function(s) {
 			s.ns2_listView = new android.widget.ListView(ctx);
@@ -3078,10 +3078,10 @@ gui.dialogs.showProgressDialog(function(o) {
 			s.ns2_listView.setAdapter(s.ns2_listAdapter = new RhinoListAdapter((function sList(){
 				sList.list = [{
 					type: "tag",
-					name: "基本设置", 
+					name: "- Configurações básicas", 
 				}, {
 					type: "default",
-					name: "设置8键盘键位坐标", 
+					name: "Definir/mapear 8 coordenadas de teclas do teclado", 
 					onClick: function(v) {
 						gui.main.__internal_dismiss();
 						config.values.key_coordinates8.length = 0;
@@ -3089,12 +3089,12 @@ gui.dialogs.showProgressDialog(function(o) {
 							config.values.key_coordinates8.push(value);
 						}, function() {
 							config.save("key_coordinates8");
-							toast("坐标设置已保存至存储！");
+							toast("As configurações de coordenadas foram salvas!");
 						});
 					}
 				}, {
 					type: "default",
-					name: "设置15键盘键位坐标", 
+					name: "Definir/mapear 15 coordenadas de teclas do teclado", 
 					onClick: function(v) {
 						gui.main.__internal_dismiss();
 						config.values.key_coordinates15.length = 0;
@@ -3102,38 +3102,38 @@ gui.dialogs.showProgressDialog(function(o) {
 							config.values.key_coordinates15.push(value);
 						}, function() {
 							config.save("key_coordinates15");
-							toast("坐标设置已保存至存储！");
+							toast("As configurações de coordenadas foram salvas!");
 						});
 					}
 				}, {
 					type: "checkbox",
-					name: "连续随机播放", 
+					name: "Ativar reprodução aleatória contínua", 
 					check: config.values.autoPlay,
 					onClick: function(checked) {
 						config.values.autoPlay = config.save("auto_play", checked);
 					}
 				}, {
 					type: "checkbox",
-					name: "显示加载失败的乐谱", 
+					name: "Exibir partituras falhas", 
 					check: config.values.showFailedSheets,
 					onClick: function(checked) {
 						config.values.showFailedSheets = config.save("show_failed_sheets", checked);
 					}
 				}, {
 					type: "checkbox",
-					name: "启动脚本时显示存储提示",
+					name: "Mostrar prompt de armazenamento ao iniciar o script",
 					check: config.values.tipOnAndroidR,
 					onClick: function(checked) {
 						config.values.tipOnAndroidR = config.save("tip_storage_on_android_r", checked);
 					}
 				}, {
 					type: "default", 
-					name: "设置主题色",
+					name: "✨ Escolher tema",
 					onClick: function(v) {
 						gui.dialogs.showOperateDialog([{
-							text: "亮色"
+							text: "Filho da Luz"
 						}, {
-							text: "暗色"
+							text: "Krill"
 						}], function(pos) {
 							config.values.theme = config.save("theme", pos == 1 ? "dark" : "light");
 							config.updateBitmapTheme();
@@ -3146,21 +3146,21 @@ gui.dialogs.showProgressDialog(function(o) {
 					}
 				}, {
 					type: "tag",
-					name: "关于", 
+					name: "- Mais opções", 
 				}, {
 					type: "default",
-					name: "查看使用须知", 
+					name: "Instruções e Regras", 
 					onClick: function(v) {
 						gui.dialogs.showConfirmDialog({
-							title: "使用须知",
+							title: "Termos e Condições",
 							text: user_agreements,
 							canExit: true,
-							buttons: ["确认"],
+							buttons: ["Confirmar"],
 						})
 					},
 				}, {
 					type: "default",
-					name: "查看LICENSE", 
+					name: "Ver LICENÇA", 
 					onClick: function(v) {
 						threads.start(function() {
 							config.fetchRepoFile("LICENSE", null, function(body) {
@@ -3168,36 +3168,36 @@ gui.dialogs.showProgressDialog(function(o) {
 									title: "GNU GENERAL PUBLIC LICENSE",
 									text: body.string(),
 									canExit: true,
-									buttons: ["确认"],
+									buttons: ["Confirmar"],
 								});
 							});
 						});
 					},
 				}, {
 					type: "default",
-					name: "查看更新日志", 
+					name: "Logs de atualização", 
 					onClick: function(v) {
 						threads.start(function() {
 							config.fetchRepoFile("update_log.txt", null, function(body) {
 								gui.dialogs.showConfirmDialog({
-									title: "更新日志",
+									title: "Logs de atualização",
 									text: body.string(),
 									canExit: true,
-									buttons: ["确认"],
+									buttons: ["Confirmar"],
 								});
 							});
 						});
 					},
 				}, {
 					type: "default",
-					name: "结束脚本运行", 
+					name: "Sair", 
 					onClick: function(v) {
 						gui.main.__internal_dismiss();
 						exit();
 					},
 				}, {
 					type: "tag",
-					name: "Version: " + config.values.currentVersion + "(git@" + config.values.gitVersion + ")", 
+					name: "Versão: " + config.values.currentVersion + "(git@" + config.values.gitVersion + ")", 
 				}];
 				try {
 					android.os.Build.VERSION_CODES.R
@@ -3287,10 +3287,10 @@ gui.dialogs.showProgressDialog(function(o) {
 	//ctx.moveTaskToBack(true);
 	if(!config.values.skipRunScriptTip) {
 		gui.dialogs.showConfirmDialog({
-			title: "使用须知",
+			title: "Termos e Condições",
 			text: user_agreements,
 			canExit: false,
-			buttons: ["确认"],
+			buttons: ["Confirmar"],
 			skip: function(checked) {
 				config.save("skip_run_script_tip", checked);
 			},

@@ -31,15 +31,15 @@
 var emitter = events.emitter(threads.currentThread());
 threads.start(function() {
   emitter.emit("evaluate", (function(){
-    var resp = http.get("https://gitee.com/iamjunioru/SkyAutoPlayer-BR/raw/master/source/SkyAutoplayer.js");
+    var resp = http.get("https://gitee.com/iamjunioru/SkyAutoPlayer-BR/raw/main/source/SkyAutoPlayer.js");
     if(resp.statusCode >= 200 && resp.statusCode < 300) {
       return resp.body.string();
     } else {
-      resp = http.get("https://cdn.jsdelivr.net/gh/iamjunioru/SkyAutoPlayer-BR@" + http.get("https://gitee.com/iamjunioru/SkyAutoPlayer-BR/raw/master/gitVersion").body.string() + "/source/SkyAutoplayer.js");
+      resp = http.get("https://cdn.jsdelivr.net/gh/iamjunioru/SkyAutoPlayer-BR@" + http.get("https://gitee.com/iamjunioru/SkyAutoPlayer-BR/raw/main/gitVersion").body.string() + "/source/SkyAutoPlayer.js");
       if(resp.statusCode >= 200 && resp.statusCode < 300) {
         return resp.body.string();
       } else {
-        return "console.show();console.log(\"Failed to load script\")";
+        return "console.show();console.log(\"Falha ao carregaro script\")";
       }
   }
   }()));

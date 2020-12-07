@@ -30,12 +30,13 @@
 const user_agreements = 
 	"Por favor, leia as instruções a seguir!\n\n" + 
 	"Se você encontrar algum bug, ​​envie uma mensagem privada para @iamjunioru ou crie um novo issue em iamjunioru/SkyAutoPlayer-BR no github para enviar um feedback sobre o bug.\n\n" + 
-	"1. SkyAutoPlayer(Doravante referido como\"Este script\")É um software/script totalmente gratuito - open source(https://github.com/iamjunioru/SkyAutoPlayer-BR)，O uso deste script para fins lucrativos é proibido！\nSe você comprou este script de outras fontes, você foi enganado.\n\n" + 
-	"2. Este script só pode ser usado para fins de entretenimento, por favor, não use este script em ocasiões formais(para se beneficiar)，Se houver alguns problemas hostis devido ao uso deste script，não tem nada a ver com o autor do script ~@iamjunioru (doravante referido como\"Autor\")Irrelevante.\n\n" + 
-	"3. Os scripts podem apenas dar a você uma sensação de satisfação, mas não de progresso，Use-o de forma adequada, lembre que apenas o esforço e dedicação real pode fazer você feliz.\n\n" + 
-	"4. Este script é apenas um\"game machine\"，Sem scores incorporados，baixe as composições do SkyStudio na GooglePlay。\n\n" + 
-	"5. Este script não aumentará a função de score descriptografado, apenas incluindo mas não se limitando a scores criptografadas do SkyStudio, JS criptografado, etc., nem aceita o compartilhamento de scores criptografadas.\n\n" + 
-	"6. A distribuição deste script está em conformidade com o contrato LGPL-2.1. Se você não souber o conteúdo do contrato, visite https://www.gnu.org/licenses para visualizar."
+	"1. SkyAutoPlayer(Doravante referido como \"Este Script\") É um software/script totalmente gratuito - open source(https://github.com/iamjunioru/SkyAutoPlayer-BR). O uso deste script para fins lucrativos é proibido！\n((Se você comprou este script de outras fontes, você foi enganado.))\n\n" + 
+	"2. Este script só pode ser usado para fins de entretenimento, por favor, não use este script em ocasiões formais(para se beneficiar). Se houver alguns problemas devido ao uso deste script，não tem nada a ver comigo - autor/modder do script ~@iamjunioru (doravante referido como \"dream#2001\").\n\n" + 
+	"3. Os scripts podem dar a você uma sensação de satisfação, mas não de progresso, então use-o de forma adequada, lembre que apenas o esforço e dedicação real pode fazer você feliz. :)\n\n" + 
+	"4. Este script é apenas um \"game machine\"，sem partituras incorporados em si，você precisa baixar ou fazer as composições do SkyStudio.\n\n" + 
+	"5. Este script não tem a função de descriptografar partituras, ele se limita a partituras não-criptografadas do SkyStudio, conseguindo ler JS não-criptografado pelo app e etc. também não aceita o compartilhamento de partituras criptografadas.\n\n" + 
+	"6. A distribuição deste script está em conformidade com o contrato LGPL-2.1. Se você não souber o conteúdo do contrato, visite https://www.gnu.org/licenses para visualizar.\n\n" +
+	"• Deu bastante trabalho adaptar isso tudo, espero que gostem.\n  ~Júnior Sousa"
 ;
 
 //script global scope
@@ -175,14 +176,14 @@ sheetmgr = {
 	
 	pitch_suggestion: [{
 		name: "C",
-		places: ["Situação", "Cemitério do sertão", "No final da Floresta Oculta, após o templo"]
+		places: ["Na entrada do castelo, no fim do sertão", "Cemitério do sertão", "No final da Floresta Oculta, após o templo"]
 	}, {
 		name: "D♭",
 		places: ["Portão de 8 pessoas", "Lugar onde aparece a baleia na Floresta Oculta antes de surgir as água-vivas" ]
 	}, {
 		name: "D",
 		places: ["Tunel esferico da Campina(indo para Aldeia)", "O início da Floresta Oculta(não voe para baixo)",
-				"霞谷终点冥想台", "墓土远古战场"]
+				"Plataforma de meditação da cidadela", "Sertão, no antigo campo de batalha"]
 	}, {
 		name: "E♭",
 		places: ["Dentro do buraco em arco à direita - atrás do primeiro portão da Floresta Oculta", "Templo destruído do Sertão"]
@@ -371,7 +372,7 @@ config = {
 	_global_storage: null,
 	
 	values: {
-		currentVersion: 0.2,
+		currentVersion: 0.3,
 		gitVersion: "",
 		
 		key_coordinates15: [],
@@ -431,7 +432,7 @@ config = {
 			config.fetchRepoFile("update_log.txt", this.values.gitVersion, function(body) {
 				gui.dialogs.showConfirmDialog({
 					title: "SkyAutoPlayer foi atualizado",
-					text: "Versão Atual: " + currentVersion + " ← " + periodVersion + "\n\nLog de atualização: \n" + body.string(),
+					text: "Versão Atual: " + currentVersion + " ← " + periodVersion + "\n\nLogs de atualização: \n" + body.string(),
 					canExit: false,
 					buttons: ["Confirmar"]
 				});
@@ -506,10 +507,10 @@ config = {
 		}
 		
 	},
-	//jsdelivr cdn需要指定repo版本, gitee和github则不用
-	//fetch顺序为 gitee raw content → jsdelivr cdn → github raw content
+	//jsdelivr cdn precisa especificar a versão do repo, gitee e github não
+	//A ordem de busca é conteúdo bruto do gitee → jsdelivr cdn → conteúdo bruto do github
 	fetchRepoFile: function(path, gitVersion, successCbk, failCbk) {
-		//Basta usar o mais estúpido se para julgar
+		//basta usar o mais a
 		var resp = http.get(encodeURI("https://gitee.com/iamjunioru/SkyAutoPlayer-BR/raw/master/" + path));
 		if(resp.statusCode >= 200 && resp.statusCode < 300) {
 			successCbk(resp.body);
@@ -981,7 +982,7 @@ gui = {
 						//skip.setChecked(Boolean(s.canSkip));
 						skip.setLayoutParams(android.widget.LinearLayout.LayoutParams(-2, -2, 0));
 						skip.getLayoutParams().setMargins(0, 0, 0, 10 * dp)
-						skip.setText("Não lembrar novamente");
+						skip.setText("Não mostrar novamente");
 						skip.setTextColor(gui.config.colors[config.values.theme].sec_text)
 						layout.addView(skip);
 					}
@@ -1617,7 +1618,7 @@ gui = {
 								onTouchFunction.offsetY = s.y - event.getRawY();
 							break;
 							case event.ACTION_UP: 
-								gui.key_coordinate_navigation._global_text.setText("Tecla" + (gui.key_coordinate_navigation.current_index + 1) + "坐标已设置: [" + event.getRawX() + ", " + event.getRawY() + "]");
+								gui.key_coordinate_navigation._global_text.setText("Tecla " + (gui.key_coordinate_navigation.current_index + 1) + "] as coordenadas foram definidas em: [" + event.getRawX() + ", " + event.getRawY() + "]");
 								keyTargetedCbk([event.getRawX(), event.getRawY()]);
 								gui.utils.value_animation("Float", 1, 0, 200 , new android.view.animation.DecelerateInterpolator(), function(anim) {
 									gui.key_coordinate_navigation._global_base.setAlpha(anim.getAnimatedValue());
@@ -1657,7 +1658,7 @@ gui = {
 					gui.key_coordinate_navigation._global_base.setAlpha(anim.getAnimatedValue());
 					gui.key_coordinate_navigation._global_text.setAlpha(anim.getAnimatedValue());
 				});
-				gui.key_coordinate_navigation._global_text.setText("Mover\"\u26d2\"Para a posição alvo para definir a " + (gui.key_coordinate_navigation.current_index + 1) + " Coordenadas chave");
+				gui.key_coordinate_navigation._global_text.setText("Mova \"\u26d2\" para a tecla para definir a " + (gui.key_coordinate_navigation.current_index + 1) + " coordenadas de chave.");
 				gui.key_coordinate_navigation.isShowing = true;
 			}
 		})},
@@ -2873,23 +2874,23 @@ gui.dialogs.showProgressDialog(function(o) {
 									gui.dialogs.showConfirmDialog({
 										title: "Como fazer upload de partituras",
 										text: "Existem duas maneiras de fazer upload de pontuações：\n\n" + 
-											"①Mensagem privada legal @iamjunioru, inclua uma breve introdução e um link para a pontuação ao enviá-la (Drive ou outros sites de download)\n" + 
-											"②Fork iamjunioru/SkyAutoplayer-BR no github\n" + 
-											"Adicione sua partitura na pasta shared_sheets e modifique shared_sheets.json de acordo com o formato\n" + 
-											"E enviar um pull request\n\n" + 
-											"Nota: Se pegou de outra pessoa, indique o autor original\n\n" + 
-											"Se ñinguém contribuir, então a lista nunca se expandirá",
+											"1. Envie uma mensagem privada para @iamjunioru ou dream#2001, inclua uma breve introdução e um link da partitura para baixar(Pelo Google Drive, Mediafire, Mega ou outros sites de download).\n" + 
+											"2. Faça uma requisição em iamjunioru/SkyAutoplayer-BR no github ou gitee;\n" + 
+											"• Adicione sua partitura na pasta shared_sheets e modifique o arquivo shared_sheets.json de acordo com o formato.\n" + 
+											"• Após isto, basta enviar um pull request.\n\n" + 
+											"Nota: Se você pegou de outra pessoa, dê os créditos ao autor original\n\n" + 
+											"Se ninguém contribuir com isso, a lista nunca se expandirá. :/",
 										canExit: true,
 										skip: function(checked) {
 											config.values.skipOnlineUploadTip = config.save("skip_online_upload_tip", checked);
 											if(checked) s.ns1_listAdapterController.removeByIndex(pos, true);
 										},
-										buttons: ["Abrir", "Abra o Github", "Cancelar"],
+										buttons: ["Entrar em contato", "Abrir o Github", "Cancelar"],
 										callback: function(id) {
 											if(id == 0) {
-												if(!app.launch("com.coolapk.market")) toast("O aplicativo não existe!");
+												if(!app.openUrl("https://www.instagram.com/dreaw7/")) toast("Direcionando ao Instagram...");
 											} else if(id == 1) {
-												app.openUrl("https://github.com/StageGuard/SkyAutoplayerScript/");
+												app.openUrl("https://github.com/iamjunioru/SkyAutoplayerBR/");
 											}
 										},
 									});
@@ -2898,19 +2899,19 @@ gui.dialogs.showProgressDialog(function(o) {
 								case 1: {
 									gui.dialogs.showConfirmDialog({
 										title: "Declaração de compartilhamento de partituras",
-										text: android.text.Html.fromHtml(String("As partituras compartilhadas por esta lista estão em -\n<a href=https://github.com/StageGuard/SkyAutoPlayerScript>github.com/StageGuard/SkyAutoPlayerScript</a>\n, confere lá!\n\n" + 
-											"Partitura original do usuário<b><u>Compartilhe e use apenas no SkyAutoplayerScript</u></b>，\n" + 
-											"Divulgue para outras plataformas, por favor<b>Obtenha autorização do autor</b>！\n\n" + 
-											"As partituras reproduzidas nesta lista compartilhada serão marcadas\n" + 
-											"Divulgue</b>Indique a autorização do autor original</b>ou<b>Siga os desejos do autor original</b>\n\n" + 
-											"Esta declaração não é exequível, é uma manifestação de qualidades pessoais\n" + 
-											"<b><u>Benefícios ilegais são indesejáveis</b></u>").replace(new RegExp("\x0a", "gi"), "<br>")),
+										text: android.text.Html.fromHtml(String("As partituras compartilhadas(<i>shared_sheets</i>) estão em: \n<b><a href=https://github.com/iamjunioru/SkyAutoPlayer-BR>github.com/iamjunioru/SkyAutoPlayer-BR</a></b>\n Confere lá!\n\n" + 
+											"1. A partitura original não é sua? <b><u> Não compartilhe e use apenas no SkyAutoplayer-BR.</u></b>.\n" + 
+											"• Não divulgue para outras plataformas caso <b>não tenha a autorização do criador, por favor.</b>！\n\n" + 
+											"2. As partituras reproduzidas nesta lista de <i>shared_sheets</i> são monitoradas.\n" + 
+											"• Caso divulgue, <b>indique a autorização do autor original</b> ou <b>siga os desejos do autor original.</b>\n\n" + 
+											"Esta declaração não é exequível, é uma manifestação de talentos e esforço pessoais.\n" + 
+											"<b><u>~benefícios ilegais são indesejáveis, principalmente para alguém que cria e se esforça para fazer partituras tão elaboradas.</b></u>").replace(new RegExp("\x0a", "gi"), "<br>")),
 										canExit: true,
 										skip: function(checked) {
 											config.values.skipOnlineSharedSheetCTip = config.save("skip_shared_sheet_c_tip", checked);
 											if(checked) s.ns1_listAdapterController.removeByIndex(pos, true);
 										},
-										buttons: ["Eu entendi"]
+										buttons: ["Eu compreendo"]
 									});
 									break;
 								}
@@ -2957,7 +2958,7 @@ gui.dialogs.showProgressDialog(function(o) {
 			s.ns1_searchEditText.setTextSize(15);
 			s.ns1_searchEditText.setTextColor(gui.config.colors[config.values.theme].text);
 			s.ns1_searchEditText.setHintTextColor(gui.config.colors[config.values.theme].sec_text);
-			s.ns1_searchEditText.setHint("Pressione Enter para iniciar a pesquisa");
+			s.ns1_searchEditText.setHint("Pressione aqui para iniciar a pesquisa");
 			s.ns1_searchEditText.setAlpha(0);
 			s.ns1_searchEditText.setOnClickListener(new android.view.View.OnClickListener({
 				onClick: function(view) {
@@ -3037,7 +3038,7 @@ gui.dialogs.showProgressDialog(function(o) {
 						});//Dicas para compartilhar partituras
 						s.ns1_listAdapterController.notifyChange();
 						s.ns1_listView.setAlpha(1);
-						gui.main._global_title.setText("Obtendo lista...");
+						gui.main._global_title.setText("Carregando lista...");
 						threads.start(function() {
 							var list = [];
 							if(typeof(filterBlock) == "function") {
@@ -3070,7 +3071,7 @@ gui.dialogs.showProgressDialog(function(o) {
 	gui.main.addPage({
 		index: 2, 
 		title: "Configurações", 
-		navigation_title: "Configurações",
+		navigation_title: "Config",
 		navigation_icon: "settings",
 		view: function(s) {
 			s.ns2_listView = new android.widget.ListView(ctx);
@@ -3081,7 +3082,7 @@ gui.dialogs.showProgressDialog(function(o) {
 					name: "- Configurações básicas", 
 				}, {
 					type: "default",
-					name: "Definir/mapear 8 coordenadas de teclas do teclado", 
+					name: "🎹 Definir/mapear 8 coordenadas de teclas do teclado", 
 					onClick: function(v) {
 						gui.main.__internal_dismiss();
 						config.values.key_coordinates8.length = 0;
@@ -3094,7 +3095,7 @@ gui.dialogs.showProgressDialog(function(o) {
 					}
 				}, {
 					type: "default",
-					name: "Definir/mapear 15 coordenadas de teclas do teclado", 
+					name: "🎹 Definir/mapear 15 coordenadas de teclas do teclado", 
 					onClick: function(v) {
 						gui.main.__internal_dismiss();
 						config.values.key_coordinates15.length = 0;
@@ -3107,14 +3108,14 @@ gui.dialogs.showProgressDialog(function(o) {
 					}
 				}, {
 					type: "checkbox",
-					name: "Ativar reprodução aleatória contínua", 
+					name: "🔁 Ativar reprodução aleatória contínua", 
 					check: config.values.autoPlay,
 					onClick: function(checked) {
 						config.values.autoPlay = config.save("auto_play", checked);
 					}
 				}, {
 					type: "checkbox",
-					name: "Exibir partituras falhas", 
+					name: "❓ Exibir partituras falhas", 
 					check: config.values.showFailedSheets,
 					onClick: function(checked) {
 						config.values.showFailedSheets = config.save("show_failed_sheets", checked);
@@ -3131,9 +3132,9 @@ gui.dialogs.showProgressDialog(function(o) {
 					name: "✨ Escolher tema",
 					onClick: function(v) {
 						gui.dialogs.showOperateDialog([{
-							text: "Filho da Luz"
+							text: "💫 Filho da Luz"
 						}, {
-							text: "Krill"
+							text: "🖤 Krill"
 						}], function(pos) {
 							config.values.theme = config.save("theme", pos == 1 ? "dark" : "light");
 							config.updateBitmapTheme();
@@ -3149,18 +3150,18 @@ gui.dialogs.showProgressDialog(function(o) {
 					name: "- Mais opções", 
 				}, {
 					type: "default",
-					name: "Instruções e Regras", 
+					name: "❗ Instruções de uso", 
 					onClick: function(v) {
 						gui.dialogs.showConfirmDialog({
 							title: "Termos e Condições",
 							text: user_agreements,
 							canExit: true,
-							buttons: ["Confirmar"],
+							buttons: ["Eu compreendo"],
 						})
 					},
 				}, {
 					type: "default",
-					name: "Ver LICENÇA", 
+					name: "📜 Ver LICENÇA", 
 					onClick: function(v) {
 						threads.start(function() {
 							config.fetchRepoFile("LICENSE", null, function(body) {
@@ -3175,7 +3176,7 @@ gui.dialogs.showProgressDialog(function(o) {
 					},
 				}, {
 					type: "default",
-					name: "Logs de atualização", 
+					name: "📜 Logs de atualização", 
 					onClick: function(v) {
 						threads.start(function() {
 							config.fetchRepoFile("update_log.txt", null, function(body) {
@@ -3190,7 +3191,7 @@ gui.dialogs.showProgressDialog(function(o) {
 					},
 				}, {
 					type: "default",
-					name: "Sair", 
+					name: "❌ Sair", 
 					onClick: function(v) {
 						gui.main.__internal_dismiss();
 						exit();

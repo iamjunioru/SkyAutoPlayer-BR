@@ -1,0 +1,13 @@
+Versão: 0.2
+Hora de atualização: 07/12/2020 - 04:05
+conteúdo de atualização:
+  * Novo: Tema filho da luz(light)
+  * Mudança: a cor da barra de título da IU agora é cinza(#1D1D1D)
+  * Novo: Interface de detalhes da partitura, clique no item da lista para visualizar
+  * Correção: Erros de interface e otimização
+  * Novo: Agora você pode mover a posição do painel de controle de jogo
+
+Versão: 0.1
+Hora de atualização: 07/12/2020 - 03:23
+conteúdo de atualização:
+  * Correção: erros de linguagem, correção de enquadramento, não há mais erro ao baixar pacote de imagens.

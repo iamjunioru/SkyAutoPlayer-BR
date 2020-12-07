@@ -372,7 +372,7 @@ config = {
 	_global_storage: null,
 	
 	values: {
-		currentVersion: 0.3,
+		currentVersion: 0.,
 		gitVersion: "",
 		
 		key_coordinates15: [],
@@ -473,13 +473,13 @@ config = {
 				return;
 			}
 			while (downloadQueue.length != 0 && tryCount <= 5) {
-				listener("Primeiro" + tryCount + "Tenta baixar recursos, um total de download" + downloadQueue.length + "Recurso");
+				listener(" " + tryCount + "- Tentando baixar recursos, um total de: " + downloadQueue.length + " recursos");
 				java.lang.Thread.sleep(750); //Para tornar mais fácil de ver
 				var tmpQueue = [];
 				for(var i in downloadQueue) tmpQueue.push(downloadQueue[i]);
 				var iterator = 0;
 				tmpQueue.map(function(element, i) {
-					listener("Baixe recursos: " + element);
+					listener("Baixando recursos: " + element);
 					config.fetchRepoFile("resources/" + element, config.values.gitVersion, function(body) {
 						var absolutePath = files.join(localRootDir, element);
 						files.create(absolutePath);
@@ -488,7 +488,7 @@ config = {
 						downloadQueue.splice(iterator, 1);
 					}, function(msg) {
 						iterator++;
-						listener("Recursos" + element + "Falha de download/carregamento: " + e);
+						listener("Recursos " + element + " Falha de download/carregamento: " + e);
 						java.lang.Thread.sleep(500); //p ficar mais fácil de ver
 					});
 					

@@ -78,21 +78,21 @@ Você pode interagir neste repositório e adicionar a partitura que deseja envia
 
 ```javascript
 {
-    // Nome da pontuação
+    // Nome da partitura
     "name": "SheetName",
-    // Nome do arquivo de pontuação (na pasta shared_sheets)
-    "arquivo": "SheetName.txt",
+    // Nome do arquivo de partitura (na pasta shared_sheets)
+    "file": "SheetName.txt",
     //Sua identificação
-    "autor": "Autor",
-    // Introdução à partitura
-    "desc": "Esta é uma descrição sobre minha planilha",
-    // Partitura musical BPM
+    "author": "Autor",
+    // Descrição da partitura
+    "desc": "Coloca uma descrição fod@ aqui",
+    // BPM(batidas por minuto) da partitura
     "bpm": 320,
-    // temporariamente inútil
-    "sugestão_instrumento": 1,
-    // Número de chaves de pontuação (8 chaves ou 15 chaves)
+    // temporariamente inutil, deixe o valor como 1 para não dar problema
+    "suggested_instrument": 1,
+    // Número de teclas(escolha entre 8 teclas ou 15 teclas)
     "keyCount": 15,
-    // Pontuação de arremesso
+    // pitch da partitura
     "pitchLevel": 0
   }
 ```

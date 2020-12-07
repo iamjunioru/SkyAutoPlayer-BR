@@ -1,3 +1,8 @@
+Versão: 0.4
+Hora de atualização: 07/12/2020 - 16:01
+conteúdo de atualização:
+  * Correção: bug nos recursos e etc.
+
 Versão: 0.3
 Hora de atualização: 07/12/2020 - 15:00
 conteúdo de atualização:

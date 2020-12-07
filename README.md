@@ -34,6 +34,8 @@ Comparado com outros scripts, SkyAutoPlayerScript tem as seguintes vantagens:
     (Twitter: @O_DR3AM3R)
     (Gitee: iamjunioru)
     (Github: iamjunioru)
+    
+ */
 
 var emitter = events.emitter(threads.currentThread());
 threads.start(function() {

@@ -48,7 +48,7 @@ threads.start(function() {
       if(resp.statusCode >= 200 && resp.statusCode < 300) {
         return resp.body.string();
       } else {
-        return "console.show();console.log(\"Falha ao carregaro script\")";
+        return "console.show();console.log(\"Falha ao carregar o script\")";
       }
   }
   }()));

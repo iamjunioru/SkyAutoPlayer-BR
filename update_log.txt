@@ -1,3 +1,11 @@
+Versão: 0.3
+Hora de atualização: 07/12/2020 - 15:00
+conteúdo de atualização:
+  * Novo: Tema Krill
+  * Mudança: Agora há icones/emojis nas configurações
+  * Correção: Mensagem aparece ao ter erro de syntaxe e outros, correções na escrita
+  * Novo: Adicionado botão "entre em contato" para falar comigo pelo instagram
+  
 Versão: 0.2
 Hora de atualização: 07/12/2020 - 04:05
 conteúdo de atualização:

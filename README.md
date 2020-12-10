@@ -10,7 +10,7 @@ Comparado com outros scripts, SkyAutoPlayerScript tem as seguintes vantagens:
 * Operação de interface completa, sem a necessidade de editar qualquer código ou animação de UI.
 * Painel de controle de reprodução completo, suporte para **pausa**, **controle de progresso**,**controle duplo de velocidade** etc.
 * Auto-definir as coordenadas da posição das teclas para evitar o problema de deslocamento ao pressionar as teclas.
-* Online [folhas compartilhadas] (https://github.com/StageGuard/SkyAutoPlayerScript/tree/master/shared_sheets), há muitas partituras de alta qualidade. ~~(Algumas partituras são tão complicadas que não podem ser tocadas)~~
+* Online [folhas compartilhadas] (https://github.com/iamjunioru/SkyAutoPlayer-BR/tree/main/shared_sheets), há muitas partituras de alta qualidade. ~~(Algumas partituras são tão complicadas que não podem ser tocadas)~~
 * Atualizações automáticas, não precisa se preocupar com a versão desatualizada.
 
 ## - Como usar

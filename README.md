@@ -5,7 +5,6 @@ Um script para reproduzir as planilhas geradas pelo SkyStudio automaticamente no
 </br> Use as permissões sem limitações fornecidas pelo Auto.js para jogar automaticamente no Sky. <br> [SkyStudio] (https://play.google.com/store/apps/details?id=com.Maple.SkyStudio).
 
 #### Características
-
 Comparado com outros scripts, SkyAutoPlayerScript tem as seguintes vantagens:
 
 * Operação de interface completa, sem a necessidade de editar qualquer código ou animação de UI.
@@ -15,7 +14,6 @@ Comparado com outros scripts, SkyAutoPlayerScript tem as seguintes vantagens:
 * Atualizações automáticas, não precisa se preocupar com a versão desatualizada.
 
 #### Como usar?
-
 <br> 1. Auto.js `4.1.1 Alpha2 (461) ` ~ download da versão: [` Ericwyn / Auto.js / releases @ V4.1.1.Alpha2`] (https://github.com/Ericwyn/Auto.js/releases/tag/V4.1.1.Alpha2)
 <br> Baixe o `Auto.js` [` Ericwyn / Auto.js / releases @ V4.1.1.Alpha2`] (https://github.com/Ericwyn/Auto.js/releases/tag/V4.1.1.Alpha2)
 <br> Página de download para Android: `autoJs-V4.1.1.Alpha2-common-armeabi-v7a-debug.apk`

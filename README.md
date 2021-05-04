@@ -14,12 +14,12 @@ Comparado com outros scripts, SkyAutoPlayerScript tem as seguintes vantagens:
 * Atualizações automáticas, não precisa se preocupar com a versão desatualizada.
 
 #### Como usar?
-<br> 1. Auto.js `4.1.1 Alpha2 (461) ` ~ download da versão: [` Ericwyn / Auto.js / releases @ V4.1.1.Alpha2`] (https://github.com/Ericwyn/Auto.js/releases/tag/V4.1.1.Alpha2)
-<br> Baixe o `Auto.js` [` Ericwyn / Auto.js / releases @ V4.1.1.Alpha2`] (https://github.com/Ericwyn/Auto.js/releases/tag/V4.1.1.Alpha2)
+* 1 - Auto.js `4.1.1 Alpha2 (461) ` ~ download da versão: [` Ericwyn / Auto.js / releases @ V4.1.1.Alpha2`] (https://github.com/Ericwyn/Auto.js/releases/tag/V4.1.1.Alpha2)
+*  Baixe o `Auto.js` [` Ericwyn / Auto.js / releases @ V4.1.1.Alpha2`] (https://github.com/Ericwyn/Auto.js/releases/tag/V4.1.1.Alpha2)
 <br> Página de download para Android: `autoJs-V4.1.1.Alpha2-common-armeabi-v7a-debug.apk`
 <br> **Faça o download aqui:**  `autoJs-V4.1.1.Alpha2-common-armeabi-v7a-debug.apk`
-<br> 2. Abra **Serviços de acessibilidade** e ative **Permissão de janela flutuante** para o Auto.js.
-<br> 3. **Crie um novo script em Auto.js, cole o seguinte código e execute**
+* 2 - Abra **Serviços de acessibilidade** e ative **Permissão de janela flutuante** para o Auto.js.
+* 3 - **Crie um novo script em Auto.js, cole o seguinte código e execute**
 <br> Crie um novo arquivo de script em Auto.js. Copie o código abaixo e execute:
 
 ```javascript
